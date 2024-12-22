@@ -1,3 +1,4 @@
+import CardDetail from "@/components/CardDetail"
 
 export default async function Page({
   params,
@@ -6,5 +7,5 @@ export default async function Page({
 }) {
   const id = (await params).id
 
-  return <div>My Card: {id}</div>
+  return <div>{id && <CardDetail id={parseInt(id)} />}</div>
 }
