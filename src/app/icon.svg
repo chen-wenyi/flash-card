@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:svgjs="http://svgjs.dev/svgjs" width="200" height="200"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200">
+  <!-- Background with gradient -->
+  <defs>
+    <linearGradient id="SvgjsLinearGradient1016" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#4158D0;stop-opacity:1"></stop>
+      <stop offset="46%" style="stop-color:#C850C0;stop-opacity:1"></stop>
+      <stop offset="100%" style="stop-color:#FFCC70;stop-opacity:1"></stop>
+    </linearGradient>
+  </defs>
+  
+  <!-- Main background -->
+  <rect x="0" y="0" width="200" height="200" fill="url(#grad1)" rx="40"></rect>
+  
+  <!-- Minimalist card symbol -->
+  <rect x="60" y="50" width="80" height="100" fill="white" rx="8" transform="rotate(-15, 100, 100)"></rect>
+  
+  <!-- Second card -->
+  <rect x="70" y="60" width="80" height="100" fill="white" rx="8" transform="rotate(-5, 100, 100)"></rect>
+  
+  <!-- Front card -->
+  <rect x="80" y="70" width="80" height="100" fill="white" rx="8" transform="rotate(5, 100, 100)"></rect>
+  
+  <!-- Abstract lightning symbol -->
+  <path d="M110 85 L95 115 L105 115 L90 145 L120 115 L110 115 L125 85 Z" fill="#4158D0" transform="rotate(5, 100, 100)"></path>
+</svg><style>@media (prefers-color-scheme: light) { :root { filter: none; } }
+@media (prefers-color-scheme: dark) { :root { filter: none; } }
+</style></svg>
