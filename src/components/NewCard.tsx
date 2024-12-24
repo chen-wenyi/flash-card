@@ -1,6 +1,5 @@
-import { Card } from '@/typing';
 import { DialogClose } from '@radix-ui/react-dialog';
-import { Pencil1Icon } from '@radix-ui/react-icons';
+import { CardStackPlusIcon } from '@radix-ui/react-icons';
 import { Button } from './ui/button';
 import {
   Dialog,
@@ -14,11 +13,11 @@ import {
 import { Tabs, TabsContent, TabsList, TabsTrigger } from './ui/tabs';
 import { Textarea } from './ui/textarea';
 
-export default function EditCard({ card }: { card?: Card }) {
+export default function NewCard() {
   return (
     <Dialog>
       <DialogTrigger>
-        <Pencil1Icon className='w-6 h-6 cursor-pointer' />
+        <CardStackPlusIcon className='w-6 h-6 cursor-pointer' />
       </DialogTrigger>
       <DialogContent>
         <DialogHeader>
@@ -31,22 +30,21 @@ export default function EditCard({ card }: { card?: Card }) {
                 <TabsTrigger value='hint'>Hint</TabsTrigger>
               </TabsList>
               <TabsContent className='h-full' value='question'>
-                <Textarea className='h-full' defaultValue={card?.desc || ''} />
+                <Textarea className='h-full' />
               </TabsContent>
               <TabsContent className='h-full' value='answer'>
-                <Textarea
-                  className='h-full'
-                  defaultValue={card?.answer || ''}
-                />
+                <Textarea className='h-full' />
               </TabsContent>
               <TabsContent className='h-full' value='hint'>
-                <Textarea className='h-full' defaultValue={card?.hint || ''} />
+                <Textarea className='h-full' />
               </TabsContent>
             </Tabs>
           </DialogDescription>
         </DialogHeader>
         <DialogFooter>
-          <Button variant='outline'>Update</Button>
+          <Button variant='outline' asChild>
+            <div>Create</div>
+          </Button>
         </DialogFooter>
         <DialogClose>
           <Button variant='destructive' className='w-full' asChild>
