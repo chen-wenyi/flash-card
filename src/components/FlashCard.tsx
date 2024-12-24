@@ -2,6 +2,7 @@
 import { Card as ICard } from '@/typing';
 import { motion, useAnimation } from 'motion/react';
 import { useState } from 'react';
+import EditCard from './EditCard';
 
 export default function FlashCard({ card }: { card: ICard }) {
   const [isFlipped, setIsFlipped] = useState(false);
@@ -17,7 +18,7 @@ export default function FlashCard({ card }: { card: ICard }) {
       scale: [1, 0.75, 1],
       transition: {
         duration: 0.8,
-        ease: 'easeInOut'
+        ease: 'easeInOut',
       },
     });
   };
@@ -37,9 +38,11 @@ export default function FlashCard({ card }: { card: ICard }) {
           backgroundColor: 'var(--card-foreground)',
         }}
       >
+        <div className='absolute right-2 top-2' onClick={e => e.stopPropagation()}>
+          <EditCard card={card} />
+        </div>
         {card.desc}
       </div>
-
       {/* Back Face */}
       <div
         className='absolute flex w-full h-full bg-green-500 justify-center items-center rounded-lg px-4 border-2'

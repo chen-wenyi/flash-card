@@ -3,4 +3,5 @@ export interface Card {
   title: string;
   desc: string;
   answer: string;
+  hint: string
 }
