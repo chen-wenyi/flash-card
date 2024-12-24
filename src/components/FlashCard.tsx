@@ -1,26 +1,56 @@
 'use client';
 import { Card as ICard } from '@/typing';
-import { motion } from 'motion/react';
-import Link from 'next/link';
-import { Card, CardDescription, CardHeader, CardTitle } from './ui/card';
+import { motion, useAnimation } from 'motion/react';
+import { useState } from 'react';
 
-export default function FlashCard({ id, title, desc }: ICard) {
+export default function FlashCard({ card }: { card: ICard }) {
+  const [isFlipped, setIsFlipped] = useState(false);
+  const controls = useAnimation();
+
+  // Handle flip and animation control
+  const handleFlip = () => {
+    setIsFlipped((prev) => !prev);
+
+    // Trigger the animation when the card is clicked
+    controls.start({
+      rotateY: isFlipped ? '0deg' : '180deg', // Flip the card
+      scale: [1, 0.75, 1],
+      transition: {
+        duration: 0.8,
+        ease: 'easeInOut'
+      },
+    });
+  };
+
   return (
-    <Link href={`/card/${id}`}>
-      <motion.div
-        whileHover={{ scale: 1.01 }}
-        whileTap={{ scale: 0.9 }}
-        className='flex flex-col h-32 rounded-md cursor-pointer'
+    <motion.div
+      className='flex flex-1 relative'
+      animate={controls} // Attach animation controls to motion div
+      style={{ transformStyle: 'preserve-3d', perspective: '1000px' }} // Enables 3D effect
+      onClick={handleFlip}
+    >
+      {/* Front Face */}
+      <div
+        className='absolute flex w-full h-full justify-center items-center rounded-lg px-4 border-2'
+        style={{
+          backfaceVisibility: 'hidden', // Hide back when front is visible
+          backgroundColor: 'var(--card-foreground)',
+        }}
       >
-        <Card className='flex h-full'>
-          <CardHeader className='flex'>
-            <CardTitle>{title}</CardTitle>
-            <CardDescription className='flex-1 overflow-hidden text-ellipsis whitespace-normal line-clamp-3'>
-              {desc}
-            </CardDescription>
-          </CardHeader>
-        </Card>
-      </motion.div>
-    </Link>
+        {card.desc}
+      </div>
+
+      {/* Back Face */}
+      <div
+        className='absolute flex w-full h-full bg-green-500 justify-center items-center rounded-lg px-4 border-2'
+        style={{
+          transform: 'rotateY(180deg)', // Back face rotated by 180 degrees
+          backfaceVisibility: 'hidden', // Hide front when back is visible
+          backgroundColor: 'var(--card-foreground)',
+        }}
+      >
+        {card.answer}
+      </div>
+    </motion.div>
   );
 }
