@@ -1,12 +1,7 @@
-import { Redis } from '@upstash/redis';
+import axios from 'axios';
 import { create } from 'zustand';
 import { createJSONStorage, persist, StateStorage } from 'zustand/middleware';
 import { Card } from './typing';
-
-const redis = new Redis({
-  url: 'https://smart-kite-52899.upstash.io',
-  token: 'Ac6jAAIjcDEyZTY2NDdjYjQyYzc0NjA2YWFjYjhiNzcxNjhiYjE4Y3AxMA',
-});
 
 export interface AppState {
   cards: Card[];
@@ -18,12 +13,14 @@ const initialCards: Card[] = [];
 // Custom storage object
 const storage: StateStorage = {
   getItem: async (name: string): Promise<string | null> => {
-    console.log(name, 'has been retrieved');
-    return (JSON.stringify(await redis.json.get(name))) || null;
+    const { data } = await axios.get<AppState | null>('/api/cards', {
+      params: { name },
+    });
+    return JSON.stringify(data) || null;
   },
   setItem: async (name: string, value: string): Promise<void> => {
     console.log(name, 'with value', value, 'has been saved');
-    await redis.json.set(name, '$', value);
+    // await redis.json.set(name, '$', value);
   },
   removeItem: async (name: string): Promise<void> => {
     console.log(name, 'has been deleted');
